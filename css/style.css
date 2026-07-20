@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Kristo Landing Page — Stylesheet
+   --------------------------------------------------------------------------
+   القيم البصرية (ألوان، مقاسات، مسافات، ظلال) منقولة حرفياً من النسخة
+   المنشورة. أي تغيير هنا يغيّر شكل الصفحة — عدّل بحذر.
+
+   الاستثناء الوحيد المقصود عن النسخة القديمة:
+   - لون الفوتر: ‏#7a706a ← ‏#746a64
+     السبب: تباين ‏#7a706a على ‏#f8efe4 = 4.24 وهو راسب في WCAG AA
+     (نص 14px يحتاج 4.5). القيمة الجديدة = 4.63 والفرق البصري شبه معدوم.
+   ========================================================================== */
+
+/* --- متغيرات التصميم ---------------------------------------------------- */
+:root {
+  --brand:        #7a1820;  /* أحمر كريستو الأساسي */
+  --brand-ink:    #231b18;  /* لون النص العام */
+  --bg:           #f8efe4;  /* خلفية الصفحة */
+  --surface:      #fffaf5;  /* خلفية الهيرو والكروت */
+  --muted:        #6f6661;  /* نص ثانوي */
+  --muted-soft:   #7c716b;  /* ملاحظة تحت الأزرار */
+  --muted-footer: #746a64;  /* الفوتر — معدّل للتباين */
+  --badge-bg:     #f0dfcf;
+  --price:        #d10000;
+  --keeta:        #13966b;
+  --hunger:       #ef4a2f;
+  --card-border:  #eadccf;
+}
+
+/* --- الأساسيات ---------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Tahoma, sans-serif; /* خطوط نظام — صفر طلبات شبكة */
+  background: var(--bg);
+  color: var(--brand-ink);
+}
+
+.wrap {
+  width: min(1100px, calc(100% - 24px));
+  margin: auto;
+}
+
+/* --- الهيدر ------------------------------------------------------------- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--brand);
+}
+
+header a {
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  padding: 11px 18px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+/* --- الهيرو ------------------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  align-items: center;
+  background: var(--surface);
+  border-radius: 30px;
+  padding: 38px;
+  box-shadow: 0 20px 60px rgba(80, 20, 20, .12);
+}
+
+/* عرض/ارتفاع صريحين على الصورة يمنعان قفزة التخطيط (CLS) */
+.hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  display: block;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .13);
+}
+
+.badge {
+  display: inline-block;
+  background: var(--badge-bg);
+  color: var(--brand);
+  padding: 8px 13px;
+  border-radius: 20px;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(34px, 5vw, 66px);
+  line-height: 1.12;
+  margin: 16px 0;
+}
+
+p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.price {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--price);
+  margin: 14px 0 20px;
+}
+
+.price small {
+  font-size: 17px;
+  color: var(--brand);
+}
+
+/* --- أزرار الطلب -------------------------------------------------------- */
+.buttons {
+  display: grid;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #fff;
+  padding: 17px 20px;
+  border-radius: 18px;
+  font-weight: 900;
+  font-size: 19px;
+  transition: transform .2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+/* استجابة فورية للمسة قبل ما التطبيق يفتح — تقلل الضغطات المكررة */
+.btn:active { transform: translateY(0) scale(.985); }
+
+.keeta  { background: var(--keeta); }
+.hunger { background: var(--hunger); }
+
+.note {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted-soft);
+}
+
+/* --- الكروت ------------------------------------------------------------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+}
+
+.card b { color: var(--brand); }
+
+/* --- الفوتر ------------------------------------------------------------- */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted-footer);
+  font-size: 14px;
+}
+
+/* --- إتاحة الوصول: مؤشر تركيز واضح للتنقل بالكيبورد --------------------- */
+a:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .btn:hover, .btn:active { transition: none; transform: none; }
+}
+
+/* --- الموبايل ----------------------------------------------------------- */
+@media (max-width: 780px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  /* الصورة فوق النص على الموبايل — وعشان كده هي عنصر LCP */
+  .hero .content { order: 2; }
+  .hero .image   { order: 1; }
+
+  .features { grid-template-columns: 1fr; }
+  h1 { font-size: 38px; }
+}
